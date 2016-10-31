@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^welcome/enroll', views.enroll, name="coursePage"),
     url(r'^logout_admin', views.logout_admin, name="logout_admin"),
 
+
 ]
