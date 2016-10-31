@@ -1,0 +1,80 @@
+{% extends "homepage/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+<br><br><br><br><br>
+<div class="container">
+
+    <div class="row">
+        <div class="col s4"></div>
+        <div class="col s4">
+            <img class="responsive-img" src="{% static 'homepage/img/logo.png' %}">
+        </div>
+    </div>
+
+    <br><br><br>
+    <div class="row">
+        <div class="col s2">;</div>
+        <div class="col s2">
+            <a href="http://www.cse.iitb.ac.in/~himanshu/home.html">
+                <div class="card-panel white lighten-4 z-depth-1" style="padding-bottom:0px">
+                    <div class="row center">
+                        <div class="card-image">
+                            <img src="{% static 'homepage/img/himanshu.jpg' %}" width="150" height="150" alt="Himanshu Gupta" class="circle responsive-img"/>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <p class="flow-text" style="font-size:100%;color:#3e2723">
+                            <b>Himanshu Gupta</b>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col s1"></div>
+
+        <div class="col s2">
+            <a href="http://www.cse.iitb.ac.in/~kunal/home.html">
+                <div class="card-panel white lighten-4 z-depth-1" style="padding-bottom:0px">
+                    <div class="row center">
+                        <div class="card-image">
+                            <img src="{% static 'homepage/img/kunal.jpg' %}" width="150" height="150" alt="Kunal Mittal" class="circle responsive-img"/>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <p class="flow-text" style="font-size:100%;color:#3e2723">
+                            <b>Kunal Mittal</b>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col s1"></div>
+
+        <div class="col s2">
+            <a href="http://www.cse.iitb.ac.in/~anschauhan/home.html">
+                <div class="card-panel white lighten-4 z-depth-1" style="padding-bottom:0px">
+                    <div class="row center">
+                        <div class="card-image">
+                            <img src="{% static 'homepage/img/anshul.jpg' %}" width="150" height="150" alt="Anshul Chauhan" class="circle responsive-img"/>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <p class="flow-text" style="font-size:100%;color:#3e2723">
+                            <b>Anshul Chauhan</b>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <h5 class="header center" style="color:#4a148c;"> The Debuggers</h5>
+
+</div>
+{% endblock %}

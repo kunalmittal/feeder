@@ -1,0 +1,26 @@
+{% extends "homepage/base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+
+<div class="container">
+<p style="color:#004d40">
+    <h2 class="header" style="color:#004d40">Login</h1>
+    <br>
+    <form method="post" name="adminLoginForm" action="">
+    {% csrf_token %}
+        <p style="color:#004d40">Username: </p>
+    <input type="text" name="username" placeholder="Enter Username">
+        <p id="text_error" style="color:red"><br></p>
+        <br>
+        <p style="color:#004d40">Password: </p>
+    <input type="password" name="password" placeholder="Enter Password">
+        <br>
+        <br>
+        <input type="submit" style="padding-left:30px;padding-right:30px;padding-top:15px;padding-bottom:15px;"/>
+    </form>
+</div>
+
+
+{% endblock %}
