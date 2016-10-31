@@ -9,7 +9,10 @@
     {% for course in all_courses %}
         <li>
             <div class="collapsible-header">{{course.course_number}}</div>
-            <div class="collapsible-body"><p>{{course.course_name}}</p></div>
+            <div class="collapsible-body">
+                <p>{{course.course_name}}</p>
+                <a href="/adminApp/welcome/{{course.course_number}}/">Enroll Students</a>
+            </div>
         </li>
     {% endfor %}
         <li>

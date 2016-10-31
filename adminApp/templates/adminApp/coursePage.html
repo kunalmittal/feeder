@@ -1,0 +1,31 @@
+{% extends "homepage/base.html" %}
+
+{% block title %}{{course_number}}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="post" name="enroll_students" action="/adminApp/welcome/enroll">
+        {% csrf_token %}
+            <div class="input-field col s12">
+                <select name="selected" multiple>
+                    <option value="" disabled selected>Choose your option</option>
+                    {% for student in all_students %}
+                        <option value="{{student.pk}}">{{student.roll_number}} {{student.user.username}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="hidden" name="course_num" value="{{course_number}}">
+            <input type="submit" style="padding-left:30px;padding-right:30px;padding-top:15px;padding-bottom:15px;"/>
+        </form>
+    </div>
+
+
+{% endblock %}
+
+{% block custom_js %}
+<script>
+$(document).ready(function() {
+    $('select').material_select();
+});
+</script>
+{% endblock %}
