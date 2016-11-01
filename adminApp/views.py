@@ -103,7 +103,8 @@ def end_deadline(request):
 
 
 def feedbackform(request,course_number):
-    context ={"course_number": course_number}
+    coursecurrent = course.objects.get(course_number=course_number)
+    context ={"course": coursecurrent, 'endques': coursecurrent.endsemquestion_set.all(),'midques': coursecurrent.midsemquestion_set.all()}
     return render(request,"adminApp/feedback.html",context)
 
 
@@ -111,15 +112,24 @@ def mid_feedback(request):
     if request.POST:
         coursenumber = request.POST['course_num']
         currcourse = course.objects.get(course_number=coursenumber)
+        allques = currcourse.midsemquestion_set.all()
         q1 = request.POST['q1']
         q2 = request.POST['q2']
-        myques = midsemquestion(ques=q1)
-        myques.course = currcourse
-        myques.save()
-        myques = midsemquestion(ques=q2)
-        myques.course = currcourse
-        myques.save()
-        currcourse.save()
+        if allques.count() == 0:
+            myques = midsemquestion(ques=q1)
+            myques.course = currcourse
+            myques.save()
+            myques = midsemquestion(ques=q2)
+            myques.course = currcourse
+            myques.save()
+            currcourse.save()
+        else:
+            myq = midsemquestion.objects.get(ques=allques[0])
+            myq.ques = q1
+            myq.save()
+            myq = midsemquestion.objects.get(ques=allques[1])
+            myq.ques = q2
+            myq.save()
     return HttpResponseRedirect("/adminApp/feedbackform/"+coursenumber)
 
 
@@ -127,14 +137,24 @@ def end_feedback(request):
     if request.POST:
         coursenumber = request.POST['course_num']
         currcourse = course.objects.get(course_number=coursenumber)
+        allques = currcourse.endsemquestion_set.all()
         q1 = request.POST['q1']
         q2 = request.POST['q2']
-        myques = endsemquestion(ques=q1)
-        myques.course = currcourse
-        myques.save()
-        myques = endsemquestion(ques=q2)
-        myques.course = currcourse
-        myques.save()
-        currcourse.save()
+        if allques.count() == 0:
+            myques = endsemquestion(ques=q1)
+            myques.course = currcourse
+            myques.save()
+            myques = endsemquestion(ques=q2)
+            myques.course = currcourse
+            myques.save()
+            currcourse.save()
+        else:
+            myq = endsemquestion.objects.get(ques=allques[0])
+            myq.ques = q1
+            myq.save()
+            myq = endsemquestion.objects.get(ques=allques[1])
+            myq.ques = q2
+            myq.save()
+
     return HttpResponseRedirect("/adminApp/feedbackform/"+coursenumber)
 

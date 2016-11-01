@@ -3,13 +3,25 @@
 {% block title %}Feedback{% endblock %}
 
 {% block content %}
+<a href="/adminApp/logout_admin">
+          <h6 class="header right" style="color:#0d47a1;"><b>LOGOUT</b>&nbsp;&nbsp;&nbsp;</h6>
+    </a>
+
+
+<a href="/adminApp/welcome">
+<h6 class="header right" style="color:#0d47a1;"><b>Back To Admin Page</b>&nbsp;&nbsp;&nbsp;</h6>
+    </a>
+
+    <br><br>
+
 
 <div class="container">
   <div id="deadline"  style="padding-top:50px;">
-    <h2 align="center">Deadline</h2>
-    <h4>Midsem deadline</h4>
-      <div class="row">
+    <h3 align="center">Deadlines</h3><br><br>
+    <h5>Midsem deadline</h5>
 
+
+      <div class="row">
         <form class="col s12" name="mid_deadline" method="post" action="/adminApp/mid_deadline/">
         {% csrf_token %}
           <div class="row">
@@ -23,9 +35,9 @@
         </form>
       </div>
 
-    <h4>Endsem Deadline</h4>
-      <div class="row">
+    <h5>Endsem Deadline</h5>
 
+      <div class="row">
         <form class="col s12" name="end_deadline" method="post" action="/adminApp/end_deadline/">
         {% csrf_token %}
           <div class="row">
@@ -38,6 +50,11 @@
           </div>
         </form>
       </div>
+
+          <a href="/adminApp/feedbackform/{{course.course_number}}">
+          <button class="btn btn-large blue darken-4 right" name="action">Generate Feedback Forms</button>
+        </a>
+
   </div>
 </div>
 

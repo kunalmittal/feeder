@@ -25,8 +25,20 @@ class midsemquestion(models.Model):
     ques = models.CharField(max_length=1000)
     course = models.ForeignKey('course')
 
+    def __str__(self):
+        return self.ques
+
+    def __repr__(self):
+        return self.ques
+
 
 class endsemquestion(models.Model):
     ques = models.CharField(max_length=1000)
     course = models.ForeignKey('course')
+
+    def __str__(self):
+        return self.ques
+
+    def __repr__(self):
+        return self.ques
 

@@ -3,26 +3,33 @@
 {% block title %}Feedback{% endblock %}
 
 {% block content %}
+<a href="/adminApp/logout_admin">
+          <h6 class="header right" style="color:#0d47a1;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LOGOUT</b>&nbsp;&nbsp;&nbsp;</h6>
+    </a>
 
+<a href="/adminApp/welcome">
+<h6 class="header right" style="color:#0d47a1;"><b>Back To Admin Page</b>&nbsp;&nbsp;&nbsp;</h6>
+    </a>
 
+    <br><br>
 
 <div class="container">
   <div id="midfeed"  style="padding-top:50px;">
-    <h2 align="center">Midsem feedback</h2>
+    <h3 align="center">Midsem feedback</h3>
         <div class="row">
         <form class="col s12" name="midform" method="post" action="/adminApp/mid_feedback/">
         {% csrf_token %}
           <div class="row">
             <div class="input-field col s12">
-              <input name= "q1" id="q1" type="text" class="validate">
-              <label for="q1">Question 1</label>
+              <textarea name= "q1" id="q1" value="{{midques.0}}" class="materialize-textarea" class="validate"></textarea>
+                <label for="q1">Question 1</label>
             </div>
 
             <div class="input-field col s12">
-              <input name="q2" id="q2" type="text" class="validate">
+              <textarea name="q2" id="q2" type="text" class="materialize-textarea"  value="{{midques.1}}" class="validate"></textarea>
               <label for="q2">Question 2</label>
             </div>
-            <input type="hidden" name="course_num" value="{{course_number}}">
+            <input type="hidden" name="course_num" value="{{course.course_number}}">
             <button class="btn btn-large blue darken-4" type="submit" name="action">Save</button>
           </div>
         </form>
@@ -33,25 +40,28 @@
 
 <div class="container">
   <div id="endfeed"  style="padding-top:50px;">
-    <h2 align="center">Endsem feedback</h2>
+    <h3 align="center">Endsem feedback</h3>
         <div class="row">
         <form class="col s12" name="endform" method="post" action="/adminApp/end_feedback/">
         {% csrf_token %}
           <div class="row">
             <div class="input-field col s12">
-              <input name= "q1" id="q1" type="text" class="validate">
+              <textarea name= "q1" id="q1" type="text" class="materialize-textarea" value="{{endques.0}}" class="validate"></textarea>
               <label for="q1">Question 1</label>
             </div>
 
             <div class="input-field col s12">
-              <input name="q2" id="q2" type="text" class="validate">
+              <textarea name="q2" id="q2" type="text" class="materialize-textarea" value="{{endques.1}}" class="validate"></textarea>
               <label for="q2">Question 2</label>
             </div>
-            <input type="hidden" name="course_num" value="{{course_number}}">
+            <input type="hidden" name="course_num" value="{{course.course_number}}">
             <button class="btn btn-large blue darken-4" type="submit" name="action">Save</button>
           </div>
         </form>
       </div>
+       <a href="/adminApp/deadlineform/{{course.course_number}}">
+          <button class="btn btn-large blue darken-4 right" name="action">Give Exam Deadlines</button>
+        </a>
   </div>
 </div>
 {% endblock %}
