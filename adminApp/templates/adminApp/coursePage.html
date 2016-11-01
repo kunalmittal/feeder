@@ -4,6 +4,9 @@
 
 {% block content %}
     <div class="container">
+        <div class="row">
+        <div class="col s2"></div>
+        <div class="col s8"><br><br>
         <form method="post" name="enroll_students" action="/adminApp/welcome/enroll">
         {% csrf_token %}
             <div class="input-field col s12">
@@ -15,8 +18,10 @@
                 </select>
             </div>
             <input type="hidden" name="course_num" value="{{course_number}}">
-            <input type="submit" style="padding-left:30px;padding-right:30px;padding-top:15px;padding-bottom:15px;"/>
+            <button class="btn btn-large light-blue darken-4" type="submit" name="action">Submit</button>
         </form>
+        </div>
+        </div>
     </div>
 
 
