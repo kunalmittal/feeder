@@ -15,3 +15,22 @@ class student(models.Model):
 
     def __str__(self):
         return self.roll_number
+
+class question(models.Model):
+	ques = models.CharField(max_length=1000)
+	midsem = models.ManyToManyField('midsem')
+	endsem = models.ManyToManyField('endsem')
+
+class midsem(models.Model):
+	start = models.CharField(max_length=100)
+	end = models.CharField(max_length=100)
+	courses = models.OneToOneField('course',on_delete=models.CASCADE)
+
+class endsem(models.Model):
+	start = models.CharField(max_length=100)
+	end = models.CharField(max_length=100)
+	courses = models.OneToOneField('course',on_delete=models.CASCADE)	
+
+
+
+

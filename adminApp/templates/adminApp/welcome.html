@@ -13,7 +13,9 @@
             <div class="collapsible-header">{{course.course_number}}</div>
             <div class="collapsible-body">
                 <p>{{course.course_name}}</p>
-                <a href="/adminApp/welcome/{{course.course_number}}/">Enroll Students</a>
+                <a href="/adminApp/welcome/{{course.course_number}}/">Enroll Students</a><br>
+                <a href="/adminApp/feedbackform/{{course.course_number}}/">Add Feedback</a><br>
+                <a href="/adminApp/deadlineform/{{course.course_number}}/">Submit Deadlines</a>
             </div>
         </li>
     {% endfor %}

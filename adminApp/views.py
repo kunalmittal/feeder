@@ -63,9 +63,49 @@ def enroll(request):
         currCourse = course.objects.get(course_number=coursenumber)
         for curr_pk in selectedStudents:
             student.objects.get(pk=curr_pk).courses.add(currCourse)
-
     return HttpResponseRedirect("/adminApp/welcome")
 
+def feedbackform(request,course_number):
+    context ={"course_number": course_number}
+    return render(request,"adminApp/feedback.html",context)
+def mid_feedback(request):
+    if request.POST:
+        question = request
+    return HttpResponse("yo")
+def end_feedback(request):
+    if request.POST:
+        question = request
+    return HttpResponse("yo")
+def deadlineform(request,course_number):
+    context ={"course_number": course_number}
+    return render(request,"adminApp/deadline.html",context)
+def mid_deadline(request):
+    if request.POST:
+        start_date = request.POST['start']
+        end_date = request.POST['end']
+        if start_date=="" or end_date=="":
+            return HttpResponseRedirect("/adminApp/welcome")
+        new_mid_deadline= midsem(start=start_date,end=end_date)
+        new_mid_deadline.save()
+        coursenumber = request.POST['course_num']
+        currcourse = course.objects.get(course_number=coursenumber)
+        new_mid_deadline.courses.add(currcourse)
+        return HttpResponseRedirect("/adminApp/welcome")
+    return HttpResponse("Yo")
+
+def end_deadline(request):
+    if request.POST:
+        start_date = request.POST['start']
+        end_date = request.POST['end']
+        if start_date=="" or end_date=="":
+            return HttpResponseRedirect("/adminApp/deadlineform")
+        new_end_deadline= endsem(start=start_date,end=end_date)
+        new_end_deadline.save()
+        coursenumber = request.POST['course_num']
+        currcourse = course.objects.get(course_number=coursenumber)
+        new_end_deadline.courses.add(currcourse)
+        return HttpResponseRedirect("/adminApp/welcome")
+    return HttpResponse("Yo2")
 
 def logout_admin(request):
     logout(request)

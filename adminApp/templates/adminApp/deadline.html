@@ -1,0 +1,59 @@
+{% extends "homepage/base.html" %}
+
+{% block title %}Feedback{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div id="deadline"  style="padding-top:50px;">
+    <h2 align="center">Deadline</h2>
+    <h4>Midsem deadline</h4>
+      <div class="row">
+
+        <form class="col s12" name="mid_deadline" action="/adminApp/mid_deadline">
+
+          <div class="row">
+            <div class="input-field col s12">
+              <input name= "start" id="q1" type="text" class="validate">
+              <label for="start">Start Date</label>
+            </div>
+ <!--          </div>
+
+          <div class="row"> -->
+            <div class="input-field col s12">
+              <input name="end" id="q2" type="text" class="validate">
+              <label for="end">End Date</label>
+            </div>
+            <input type="hidden" name="course_num" value="{{course_number}}">
+            <input type="submit" style="padding-left:30px;padding-right:30px;padding-top:15px;padding-bottom:15px;"/>
+          </div>
+        </form>
+      </div>
+
+    <h4>Endsem Deadline</h4>
+      <div class="row">
+
+        <form class="col s12" name="end_deadline" action="/adminApp/dend_eadline">
+
+          <div class="row">
+            <div class="input-field col s12">
+              <input name= "start" id="q1" type="text" class="validate">
+              <label for="start">Start Date</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <input name="end" id="q2" type="text" class="validate">
+              <label for="end">End Date</label>
+            </div>
+          </div>
+          <input type="hidden" name="course_num" value="{{course_number}}">
+          <input type="submit" style="padding-left:30px;padding-right:30px;padding-top:15px;padding-bottom:15px;"/>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+{% endblock %}
