@@ -3,7 +3,9 @@ from django.http import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login, logout
 from .models import *
+from django.core.exceptions import ObjectDoesNotExist
 import csv
+
 
 def loginForm(request):
     if request.user.is_authenticated():
@@ -41,6 +43,7 @@ def welcome(request):
     context = {'all_courses': all_courses}
     return render(request, 'adminApp/welcome.html', context)
 
+
 def addCourse(request):
     if request.POST:
         coursename = request.POST['courseName']
@@ -51,10 +54,12 @@ def addCourse(request):
         newCourse.save()
     return HttpResponseRedirect("/adminApp/welcome")
 
+
 def coursePage(request,course_number):
     all_students = student.objects.all()
     context = {"course_number": course_number, "all_students": all_students}
     return render(request,"adminApp/coursePage.html", context)
+
 
 def enroll(request):
     if request.POST:
@@ -63,11 +68,73 @@ def enroll(request):
         currCourse = course.objects.get(course_number=coursenumber)
         for curr_pk in selectedStudents:
             student.objects.get(pk=curr_pk).courses.add(currCourse)
-
     return HttpResponseRedirect("/adminApp/welcome")
 
 
 def logout_admin(request):
     logout(request)
     return HttpResponseRedirect('/adminApp/')
+
+
+def deadlineform(request,course_number):
+    thiscourse = course.objects.get(course_number=course_number)
+    context ={"course": thiscourse}
+    return render(request,"adminApp/deadline.html", context)
+
+
+def mid_deadline(request):
+    if request.POST:
+        coursenumber = request.POST['course_num']
+        currcourse = course.objects.get(course_number=coursenumber)
+        formdate = request.POST['midDate']
+        currcourse.mid_deadline = formdate
+        currcourse.save()
+    return HttpResponseRedirect("/adminApp/deadlineform/"+coursenumber)
+
+
+def end_deadline(request):
+    if request.POST:
+        coursenumber = request.POST['course_num']
+        currcourse = course.objects.get(course_number=coursenumber)
+        formdate = request.POST['endDate']
+        currcourse.end_deadline = formdate
+        currcourse.save()
+    return HttpResponseRedirect("/adminApp/deadlineform/"+coursenumber)
+
+
+def feedbackform(request,course_number):
+    context ={"course_number": course_number}
+    return render(request,"adminApp/feedback.html",context)
+
+
+def mid_feedback(request):
+    if request.POST:
+        coursenumber = request.POST['course_num']
+        currcourse = course.objects.get(course_number=coursenumber)
+        q1 = request.POST['q1']
+        q2 = request.POST['q2']
+        myques = midsemquestion(ques=q1)
+        myques.course = currcourse
+        myques.save()
+        myques = midsemquestion(ques=q2)
+        myques.course = currcourse
+        myques.save()
+        currcourse.save()
+    return HttpResponseRedirect("/adminApp/feedbackform/"+coursenumber)
+
+
+def end_feedback(request):
+    if request.POST:
+        coursenumber = request.POST['course_num']
+        currcourse = course.objects.get(course_number=coursenumber)
+        q1 = request.POST['q1']
+        q2 = request.POST['q2']
+        myques = endsemquestion(ques=q1)
+        myques.course = currcourse
+        myques.save()
+        myques = endsemquestion(ques=q2)
+        myques.course = currcourse
+        myques.save()
+        currcourse.save()
+    return HttpResponseRedirect("/adminApp/feedbackform/"+coursenumber)
 
