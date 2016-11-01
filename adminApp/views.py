@@ -34,8 +34,10 @@ def welcome(request):
         for row in reader:
             myrollno = row[0]
             myname = row[1]
+            mypassword = myrollno
+            myemail = row[3]
             if (not student.objects.filter(roll_number=myrollno).exists()) and (not User.objects.filter(username=myname).exists()):
-                newUser = User(username=myname)
+                newUser = User(username=myname, password=mypassword, email=myemail)
                 newUser.save()
                 newStudent = student(roll_number=myrollno, user=newUser)
                 newStudent.save()
@@ -104,7 +106,7 @@ def end_deadline(request):
 
 def feedbackform(request,course_number):
     coursecurrent = course.objects.get(course_number=course_number)
-    context ={"course": coursecurrent, 'endques': coursecurrent.endsemquestion_set.all(),'midques': coursecurrent.midsemquestion_set.all()}
+    context ={"course": coursecurrent, 'endques': coursecurrent.endsemquestion_set.all(), 'midques': coursecurrent.midsemquestion_set.all()}
     return render(request,"adminApp/feedback.html",context)
 
 

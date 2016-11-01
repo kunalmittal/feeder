@@ -21,15 +21,15 @@
         {% csrf_token %}
           <div class="row">
             <div class="input-field col s12">
-              <textarea name= "q1" id="q1" value="{{midques.0}}" class="materialize-textarea" class="validate"></textarea>
-                <label for="q1">Question 1</label>
+              <input name= "q1" id="q1" value="{{midques.0}}" class="materialize-textarea" class="validate"></input>
+
             </div>
 
             <div class="input-field col s12">
-              <textarea name="q2" id="q2" type="text" class="materialize-textarea"  value="{{midques.1}}" class="validate"></textarea>
-              <label for="q2">Question 2</label>
+              <input name="q2" id="q2" type="text" placeholder="Question 1" class="materialize-textarea"  value="{{midques.1}}" class="validate"></input>
+
             </div>
-            <input type="hidden" name="course_num" value="{{course.course_number}}">
+            <input type="hidden" name="course_num" placeholder="Question 2" value="{{course.course_number}}">
             <button class="btn btn-large blue darken-4" type="submit" name="action">Save</button>
           </div>
         </form>
@@ -46,13 +46,13 @@
         {% csrf_token %}
           <div class="row">
             <div class="input-field col s12">
-              <textarea name= "q1" id="q1" type="text" class="materialize-textarea" value="{{endques.0}}" class="validate"></textarea>
-              <label for="q1">Question 1</label>
+              <input name= "q1" id="q1" type="text" placeholder="Question 1" class="materialize-textarea" value="{{endques.0}}" class="validate"></input>
+
             </div>
 
             <div class="input-field col s12">
-              <textarea name="q2" id="q2" type="text" class="materialize-textarea" value="{{endques.1}}" class="validate"></textarea>
-              <label for="q2">Question 2</label>
+              <input name="q2" id="q2" type="text" placeholder="Question 2" class="materialize-textarea" value="{{endques.1}}" class="validate"></input>
+
             </div>
             <input type="hidden" name="course_num" value="{{course.course_number}}">
             <button class="btn btn-large blue darken-4" type="submit" name="action">Save</button>
