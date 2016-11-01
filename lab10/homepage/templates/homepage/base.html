@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'homepage/css/materialize.min.css' %}" type = "text/css"/>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper blue darken-4">
+            <a href="/" class="brand-logo">&nbsp;&nbsp;Feed'er</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/adminApp">Admin Login</a></li>
+          </ul>
+        </div>
+    </nav>
+
+
+    {% block content %}
+    {% endblock %}
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'homepage/js/materialize.min.js' %}"></script>
+    {% block custom_js %}
+    {% endblock %}
+</body>
+</html>
