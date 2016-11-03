@@ -5,11 +5,10 @@ from django.contrib.auth import authenticate,login, logout
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
 import csv
-
+import json
+from django.views.decorators.csrf import csrf_exempt
 
 def loginForm(request):
-    if request.user.is_authenticated():
-        return HttpResponseRedirect("welcome")
     username = password = ''
     if request.POST:
         username = request.POST['username']
@@ -29,21 +28,23 @@ def loginForm(request):
 
 @login_required(login_url='/adminApp/')
 def welcome(request):
-    with open("adminApp/students.csv", 'r') as f:
-        reader = csv.reader(f)
-        for row in reader:
-            myrollno = row[0]
-            myname = row[1]
-            mypassword = myrollno
-            myemail = row[3]
-            if (not student.objects.filter(roll_number=myrollno).exists()) and (not User.objects.filter(username=myname).exists()):
-                newUser = User(username=myname, password=mypassword, email=myemail)
-                newUser.save()
-                newStudent = student(roll_number=myrollno, user=newUser)
-                newStudent.save()
-    all_courses = course.objects.all()
-    context = {'all_courses': all_courses}
-    return render(request, 'adminApp/welcome.html', context)
+    if request.user.is_superuser:
+        with open("adminApp/students.csv", 'r') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                myrollno = row[0]
+                myname = row[0]
+                mypassword = row[0]
+                myemail = row[3]
+                if (not student.objects.filter(roll_number=myrollno).exists()) and (not User.objects.filter(username=myname).exists()):
+                    newUser = User.objects.create_user(myname, myemail, mypassword)
+                    newUser.save()
+                    newStudent = student(roll_number=myrollno, user=newUser)
+                    newStudent.save()
+        all_courses = course.objects.all()
+        context = {'all_courses': all_courses}
+        return render(request, 'adminApp/welcome.html', context)
+    return HttpResponse("Permission Denied - You are not admin")
 
 
 def addCourse(request):
@@ -78,7 +79,7 @@ def logout_admin(request):
     return HttpResponseRedirect('/adminApp/')
 
 
-def deadlineform(request,course_number):
+def deadlineform(request, course_number):
     thiscourse = course.objects.get(course_number=course_number)
     context ={"course": thiscourse}
     return render(request,"adminApp/deadline.html", context)
@@ -159,4 +160,23 @@ def end_feedback(request):
             myq.save()
 
     return HttpResponseRedirect("/adminApp/feedbackform/"+coursenumber)
+
+
+@csrf_exempt
+def loginApp(request):
+    if request.method == 'POST':
+        received_json_data = json.loads(request.body.decode("utf-8"))
+        username = received_json_data["username"]
+        mypassword = received_json_data["pass"]
+        print(username)
+        print(mypassword)
+        user = authenticate(username=username, password=mypassword)
+        if user is not None:
+            authenticated = True
+        else:
+            authenticated = False
+        return StreamingHttpResponse(json.dumps(authenticated), content_type="application/json")
+    return HttpResponse("bad username/password")
+
+
 

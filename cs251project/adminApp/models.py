@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class course(models.Model):
     course_name = models.CharField(max_length=50)
     course_number = models.CharField(max_length=20)
-
+    mid_deadline = models.DateField(null="true")
     end_deadline = models.DateField(null="true")
 
     def __str__(self):

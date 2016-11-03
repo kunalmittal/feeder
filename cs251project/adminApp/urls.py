@@ -20,8 +20,5 @@ urlpatterns = [
     url(r'^mid_feedback/$',views.mid_feedback,name="mid_feedback"),
     url(r'^end_feedback/$',views.end_feedback,name="end_feedback"),
 
-
-
-
-
+    url(r'^loginApp/$', views.loginApp, name="loginApp"),
 ]
