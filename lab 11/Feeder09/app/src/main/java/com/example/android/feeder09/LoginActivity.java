@@ -352,7 +352,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             try {
                 // Simulate network access.
-                URL url = new URL("http://localhost:8009/");
+                URL url = new URL("http://localhost:8009/adminApp/loginApp/");
                 //URL url = new URL("http://192.168.0.111:8009/adminApp/loginApp/");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
