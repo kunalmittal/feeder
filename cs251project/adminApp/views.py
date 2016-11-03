@@ -171,11 +171,12 @@ def loginApp(request):
         print(username)
         print(mypassword)
         user = authenticate(username=username, password=mypassword)
+        data = {}
         if user is not None:
-            authenticated = True
+            data["authenticated"] = True
         else:
-            authenticated = False
-        return StreamingHttpResponse(json.dumps(authenticated), content_type="application/json")
+            data["authenticated"] = False
+        return StreamingHttpResponse(json.dumps(data), content_type="application/json")
     return HttpResponse("bad username/password")
 
 

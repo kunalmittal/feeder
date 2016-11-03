@@ -3,6 +3,8 @@ package com.example.android.feeder09;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -53,6 +55,8 @@ import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.R.attr.duration;
+import static android.R.id.message;
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 import static java.security.AccessController.getContext;
 
 /**
@@ -324,6 +328,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private boolean isAuthenticated;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -338,6 +343,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // Simulate network access.
 
                 URL url = new URL("http://192.168.0.111:8009/adminApp/loginApp/");
+                //URL url = new URL("http://192.168.0.112:8011/Feeder11/app_login/");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setDoInput(true);
@@ -377,8 +383,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     }
                     br.close();
 
-                    System.out.println(""+sb.toString());
-
+                    String json_text = sb.toString();
+                    JSONObject myObject = new JSONObject(json_text);
+                    isAuthenticated =(boolean) myObject.get("authenticated");
                 }
                 else{
                     System.out.println(urlConnection.getResponseMessage());
@@ -407,9 +414,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
+                if(isAuthenticated){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("name_main",mEmail.toString());
+                    startActivity(intent);
+                }
+                else{
+                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.requestFocus();
+                }
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.setError(getString(R.string.error_network_connection));
                 mPasswordView.requestFocus();
             }
         }
