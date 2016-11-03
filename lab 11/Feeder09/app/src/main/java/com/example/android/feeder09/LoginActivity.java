@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -90,6 +91,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn",false);  //false is the value when key doesn't exist
+        if(isLoggedIn){
+            String username = sharedPreferences.getString("username", "");    //empty if doesn't exist
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("name_main",username);
+            startActivity(intent);
+        }
+
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -341,9 +352,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             try {
                 // Simulate network access.
-
-                URL url = new URL("http://192.168.0.111:8009/adminApp/loginApp/");
-                //URL url = new URL("http://192.168.0.112:8011/Feeder11/app_login/");
+                URL url = new URL("http://localhost:8009/");
+                //URL url = new URL("http://192.168.0.111:8009/adminApp/loginApp/");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setDoInput(true);
@@ -390,6 +400,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 else{
                     System.out.println(urlConnection.getResponseMessage());
                 }
+                urlConnection.disconnect();
 
             } catch (IOException|JSONException e) {
                 System.out.println("Hi this is an exception");
@@ -415,8 +426,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 if(isAuthenticated){
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.putString("username", mEmail);
+                    editor.commit();
+
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("name_main",mEmail.toString());
+                    intent.putExtra("name_main",mEmail);
                     startActivity(intent);
                 }
                 else{
@@ -435,5 +452,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
 }
+
+
+
 

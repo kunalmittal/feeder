@@ -1,0 +1,72 @@
+{% extends "homepage/base.html" %}
+
+{% block title %}Welcome Admin{% endblock %}
+
+{% block content %}
+    <a href="/adminApp/logout_admin">
+          <h6 class="header right" style="color:#0d47a1;"><b>LOGOUT</b>&nbsp;&nbsp;&nbsp;</h6>
+    </a>
+    <br><br>
+    <div class="container">
+    <div class="row">
+        <div class="col s2"></div>
+        <div class="col s8">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header light-blue darken-4" style="padding:10px;">
+                          <h5 class="header" style="color:white;">&nbsp;&nbsp;Add Course</h5>
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="container">
+
+                            <div class="col s1"></div>
+                            <form name="course_add" action="{% url 'addCourse' %}" method="post">
+                            {% csrf_token %}
+                                <br>
+                                <input type="text" name="courseNumber" placeholder="Enter Course Number">
+                                <br>
+                                <input type="text" name="courseName" placeholder="Enter Course Name">
+                                <button class="btn btn-large light-blue darken-4" type="submit" name="action">Submit</button>
+                                <br><br>
+                            </form>
+                        </div>
+                        </div>
+
+                </li>
+
+            {% for course in all_courses %}
+                <li>
+                    <div class="collapsible-header light-blue lighten-5" style="padding:10px;">
+                        <h6 class="flow-text" style="color:#004d40;font-size:130%">
+                        &nbsp;&nbsp;<b>{{course.course_number}}</b>
+                        </h6>
+                    </div>
+                    <div class="collapsible-body">
+                        <br>
+                        <h5 class="flow-text center" style="font-size:120%">&nbsp;&nbsp;&nbsp;<b>{{course.course_name}}</b></h5>
+                        <div class="row">
+                            <div class="col s4">
+                                <a href="/adminApp/welcome/{{course.course_number}}/">
+                                        <h5 class="flow-text center" style="font-size:100%;color:#1a237e">Enroll Students</h5>
+                                </a>
+                            </div>
+                            <div class="col s4">
+                                <a href="/adminApp/feedbackform/{{course.course_number}}/">
+                                    <h5 class="flow-text center" style="font-size:100%;color:#1a237e">Feedback Forms</h5>
+                                </a>
+                            </div>
+                            <div class="col s4">
+                                <a href="/adminApp/deadlineform/{{course.course_number}}/">
+                                    <h5 class="flow-text center" style="font-size:100%;color:#1a237e">Deadlines</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
