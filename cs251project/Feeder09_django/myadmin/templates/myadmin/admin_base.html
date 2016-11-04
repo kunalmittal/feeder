@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome Admin</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'myadmin/css/admin_base.css' %}">
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+    <div id="wrapper" data-spy="scroll" data-target="#spy" class="">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="">
+            <nav id="spy">
+                <ul class="sidebar-nav nav">
+                    <li class=""> <a href="/admin/home/" data-scroll="" class="">
+                                <span class="fa fa-anchor solo">Running Courses</span>
+                            </a>
+
+                    </li>
+                    <li class=""> <a href="/admin/add_course/" data-scroll="" class="">
+                                <span class="fa fa-anchor solo">Add Courses</span>
+                            </a>
+
+                    </li>
+                    <li class=""> <a href="/admin/deadlines/" data-scroll="" class="">
+                                <span class="fa fa-anchor solo">View Deadlines</span>
+                            </a>
+
+                    </li>
+                    <li class=""> <a href="/admin/enroll" data-scroll="" class="">
+                                <span class="fa fa-anchor solo">Enroll Students</span>
+                            </a>
+
+                    </li>
+                    <li class=""> <a href="/admin/load_students" data-scroll="" class="">
+                                <span class="fa fa-anchor solo">Load students.csv</span>
+                            </a>
+
+                    </li>
+                    <li class=""> <a href="/admin/logout/" data-scroll="" class="">
+                                <span class="fa fa-anchor solo">Logout</span>
+                            </a>
+
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+        <!-- Page content -->
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+    <script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/jquery-3.1.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myadmin/js/sidebar.js' %}"></script>
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% extends "myadmin/admin_base.html" %}
+
+{% block content %}
+
+<div id="page-content-wrapper" class="">
+    <div class="page-content inset">
+        <div class="content-header">
+             <h1 id="home" class="">
+                    <a id="menu-toggle" href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                Enroll Students
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 well">
+
+                    <form action="" id="addCourse" method="post">
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <label for="course_number">Course Number</label>
+                            <select id="course_number" name="course_number" class="form-control">
+                                {% for course in all_courses %}
+                                <option>{{course.course_number}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Semester:&nbsp;&nbsp;</label>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="Autumn" checked>
+                                Autumn
+                              </label>
+                            </div>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="Spring">
+                                Spring
+                              </label>
+                            </div>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="Summer">
+                                Summer
+                              </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="year" for="year">Year: </label>
+                            <select name="year" id="year" class="form-control">
+                                <option>2018</option>
+                                <option>2017</option>
+                                <option selected>2016</option>
+                                <option>2015</option>
+                                <option>2014</option>
+                                <option>2013</option>
+                                <option>2012</option>
+                                <option>2011</option>
+                                <option>2010</option>
+                            </select>
+                        </div>
+                        <button type="submit" id="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

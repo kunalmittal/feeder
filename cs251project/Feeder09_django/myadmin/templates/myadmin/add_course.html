@@ -1,0 +1,106 @@
+{% extends "myadmin/admin_base.html" %}
+
+{% block content %}
+
+<div id="page-content-wrapper" class="">
+    <div class="page-content inset">
+        <div class="content-header">
+             <h1 id="home" class="">
+                    <a id="menu-toggle" href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                Add a Course
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 well">
+                    <form action="" id="addCourse" method="post">
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <label for="course_number">Course Number</label>
+                            <input type="text" class="form-control" name="course_number" id="course_number" placeholder="Example: CS 251">
+                        </div>
+                        <div class="form-group">
+                            <label for="course_name">Course Name</label>
+                            <input type="text" class="form-control" name="course_name" id="course_name" placeholder="Example: Software Systems Lab">
+                        </div>
+                        <div class="form-group">
+                            <label>Semester:&nbsp;&nbsp;</label>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="Autumn" checked>
+                                Autumn
+                              </label>
+                            </div>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="Spring">
+                                Spring
+                              </label>
+                            </div>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="Summer">
+                                Summer
+                              </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="year" for="end_date">Year: </label>
+                            <select name="year" class="form-control">
+                                <option>2018</option>
+                                <option>2017</option>
+                                <option selected>2016</option>
+                                <option>2015</option>
+                                <option>2014</option>
+                                <option>2013</option>
+                                <option>2012</option>
+                                <option>2011</option>
+                                <option>2010</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group"> <!-- Date input -->
+                            <label class="control-label" for="mid_date">Midsem Exam Date: </label>
+                            <input class="form-control" id="mid_date" value="2016-01-01" name="midsem_date" placeholder="MM/DD/YYY" type="text"/>
+                        </div>
+                        <div class="form-group"> <!-- Date input -->
+                            <label class="control-label" for="end_date">Endsem Exam Date: </label>
+                            <input class="form-control" id="end_date" value="2016-01-01" name="endsem_date" placeholder="MM/DD/YYY" type="text"/>
+                        </div>
+
+                        <button type="submit" id="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function(){
+      var date_input1=$('input[name="midsem_date"]');
+      var date_input2=$('input[name="endsem_date"]');
+      date_input1.datepicker({ format: 'yyyy-mm-dd' });
+      date_input2.datepicker({ format: 'yyyy-mm-dd' });
+    });
+    $('#submit').click(function(){
+       if($('#course_number').val() == '' || $('#course_name').val() == ''){
+          alert('Input can not be left blank');
+          return false;
+       }
+    });
+</script>
+
+{% endblock %}

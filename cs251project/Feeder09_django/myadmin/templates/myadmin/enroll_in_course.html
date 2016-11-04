@@ -1,0 +1,62 @@
+{% extends "myadmin/admin_base.html" %}
+
+{% block content %}
+
+<div id="page-content-wrapper" class="">
+    <div class="page-content inset">
+        <div class="content-header">
+             <h1 id="home" class="">
+                    <a id="menu-toggle" href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                {{ course.course_number }}
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 well">
+
+                    <form action="student/" id="addCourse" method="post">
+                    {% csrf_token %}
+                        <button type="submit" id="submit" class="btn btn-default pull-right">ENROLL STUDENTS</button>
+                        <div class="checkbox">
+                             <label>
+                                <input type="checkbox" name="all_button" onClick="toggle(this)">All
+
+                             </label>
+                        </div>
+                        {% for student in all_students %}
+                        <div class="checkbox">
+                             <label>
+                                <input type="checkbox" name="student_list" value="{{student.user.username}}">
+                                {{student.user.username}} {{student.user.first_name}}
+                             </label>
+                        </div>
+                        {% endfor %}
+                        <input type="hidden" name="course_number" value="{{course.course_number}}">
+                        <input type="hidden" name="time_of_year" value="{{course.time_of_year}}">
+                        <input type="hidden" name="year" value="{{course.year}}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    function toggle(source) {
+        checkboxes = document.getElementsByName('student_list');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            checkboxes[i].checked = source.checked;
+        }
+    }
+</script>
+{% endblock %}
