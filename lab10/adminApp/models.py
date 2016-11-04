@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 class course(models.Model):
     course_name = models.CharField(max_length=50)
     course_number = models.CharField(max_length=20)

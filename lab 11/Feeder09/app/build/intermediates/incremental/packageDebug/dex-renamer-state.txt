@@ -1,0 +1,7 @@
+#Thu Nov 03 17:15:40 IST 2016
+base.0=/Users/kunal/AndroidStudioProjects/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ea911a529d64e14692a4e4ebf7bd8fe7825c9fad
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/kunal/AndroidStudioProjects/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_97ae6833f0ed3069a64735b7638ba7d88cb09ccf/classes.dex
+base.1=/Users/kunal/AndroidStudioProjects/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_97ae6833f0ed3069a64735b7638ba7d88cb09ccf
+file.0=/Users/kunal/AndroidStudioProjects/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ea911a529d64e14692a4e4ebf7bd8fe7825c9fad/classes.dex
