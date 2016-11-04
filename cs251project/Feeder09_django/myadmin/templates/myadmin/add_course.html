@@ -19,64 +19,93 @@
         <div class="row">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 well">
+
                     <form action="" id="addCourse" method="post">
                     {% csrf_token %}
-                        <div class="form-group">
-                            <label for="course_number">Course Number</label>
-                            <input type="text" class="form-control" name="course_number" id="course_number" placeholder="Example: CS 251">
-                        </div>
-                        <div class="form-group">
-                            <label for="course_name">Course Name</label>
-                            <input type="text" class="form-control" name="course_name" id="course_name" placeholder="Example: Software Systems Lab">
-                        </div>
-                        <div class="form-group">
-                            <label>Semester:&nbsp;&nbsp;</label>
-                            <div class="radio-inline">
-                              <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="Autumn" checked>
-                                Autumn
-                              </label>
+
+                        <div id="detail_tab">
+                            <div class="form-group">
+                                <label for="course_number">Course Number</label>
+                                <input type="text" class="form-control" name="course_number" id="course_number" placeholder="Example: CS 251" required>
                             </div>
-                            <div class="radio-inline">
-                              <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="Spring">
-                                Spring
-                              </label>
+                            <div class="form-group">
+                                <label for="course_name">Course Name</label>
+                                <input type="text" class="form-control" name="course_name" id="course_name" placeholder="Example: Software Systems Lab" required>
                             </div>
-                            <div class="radio-inline">
-                              <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="Summer">
-                                Summer
-                              </label>
+                            <div class="form-group">
+                                <label>Semester:&nbsp;&nbsp;</label>
+                                <div class="radio-inline">
+                                  <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="Autumn" checked>
+                                    Autumn
+                                  </label>
+                                </div>
+                                <div class="radio-inline">
+                                  <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="Spring">
+                                    Spring
+                                  </label>
+                                </div>
+                                <div class="radio-inline">
+                                  <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="Summer">
+                                    Summer
+                                  </label>
+                                </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="year" for="end_date">Year: </label>
+                                <select name="year" class="form-control">
+                                    <option>2018</option>
+                                    <option>2017</option>
+                                    <option selected>2016</option>
+                                    <option>2015</option>
+                                    <option>2014</option>
+                                    <option>2013</option>
+                                    <option>2012</option>
+                                    <option>2011</option>
+                                    <option>2010</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group"> <!-- Date input -->
+                                <label class="control-label" for="mid_date">Midsem Exam Date: </label>
+                                <input class="form-control" id="mid_date" value="2016-01-01" name="midsem_date" placeholder="MM/DD/YYY" type="text"/>
+                            </div>
+                            <div class="form-group"> <!-- Date input -->
+                                <label class="control-label" for="end_date">Endsem Exam Date: </label>
+                                <input class="form-control" id="end_date" value="2016-01-01" name="endsem_date" placeholder="MM/DD/YYY" type="text"/>
+                            </div>
+                            <input type="button" id="nextButton" value="Next" class="btn btn-primary pull-right">
                         </div>
 
-                        <div class="form-group">
-                            <label class="year" for="end_date">Year: </label>
-                            <select name="year" class="form-control">
-                                <option>2018</option>
-                                <option>2017</option>
-                                <option selected>2016</option>
-                                <option>2015</option>
-                                <option>2014</option>
-                                <option>2013</option>
-                                <option>2012</option>
-                                <option>2011</option>
-                                <option>2010</option>
-                            </select>
+                        <div id="feedback_tab" hidden>
+                            <legend>Midsem</legend>
+                            <div class="form-group">
+                                <label for="q1">Question 1</label>
+                                <textarea class="form-control" name="midsem1" id="q1" rows="3" required>The course as a whole was ... ( Rate from 1-5 )</textarea>
+                            </div>
+                            <label for="q2">Question 2</label>
+                            <div class="form-group">
+                                <textarea class="form-control" name="midsem2" id="q2" rows="3" required>The homework assignments and/or associated laboratory exercises were ... ( Easy being 1 and Hard being 5 )</textarea>
+                            </div>
+                        <legend>Endsem</legend>
+                            <div class="form-group">
+                                <label for="eq1">Question 1</label>
+                                <textarea class="form-control" id="eq1" name="endsem1" rows="3" required>The course as a whole was ... ( Rate from 1-5 )</textarea>
+                            </div>
+                            <label for="eq2">Question 2</label>
+                            <div class="form-group">
+                                <textarea class="form-control" id="eq2" name="endsem2" rows="3" required>The homework assignments and/or associated laboratory exercises were ... ( Easy being 1 and Hard being 5 )</textarea>
+                            </div>
+                            <button type="submit" id="submit" class="btn btn-primary pull-right">Submit</button>
+                            <input type="button" id="backButton" value="Previuos" class="btn btn-primary">
                         </div>
-
-                        <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="mid_date">Midsem Exam Date: </label>
-                            <input class="form-control" id="mid_date" value="2016-01-01" name="midsem_date" placeholder="MM/DD/YYY" type="text"/>
-                        </div>
-                        <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="end_date">Endsem Exam Date: </label>
-                            <input class="form-control" id="end_date" value="2016-01-01" name="endsem_date" placeholder="MM/DD/YYY" type="text"/>
-                        </div>
-
-                        <button type="submit" id="submit" class="btn btn-default">Submit</button>
                     </form>
+
+
+
                 </div>
             </div>
         </div>
@@ -95,12 +124,16 @@
       date_input1.datepicker({ format: 'yyyy-mm-dd' });
       date_input2.datepicker({ format: 'yyyy-mm-dd' });
     });
-    $('#submit').click(function(){
-       if($('#course_number').val() == '' || $('#course_name').val() == ''){
-          alert('Input can not be left blank');
-          return false;
-       }
-    });
+
+$("#nextButton").click(function(){
+    $("#feedback_tab").show();
+    $("#detail_tab").hide();
+});
+$("#backButton").click(function(){
+    $("#feedback_tab").hide();
+    $("#detail_tab").show();
+});
+
 </script>
 
 {% endblock %}

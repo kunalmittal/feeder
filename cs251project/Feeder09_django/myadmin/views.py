@@ -4,12 +4,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from myadmin.models import *
 import csv
+from django.views.decorators.cache import cache_control
 import json
 from django.views.decorators.csrf import csrf_exempt
 
 
 def isAdmin(username):
-    if username[0] == "a" or username[0] == "s":   #CAN REMOVE LATER
+    if username[0] == "a":
         return True
     return False
 
@@ -42,22 +43,8 @@ def add_course(request):
             mid_deadline.save()
             end_deadline = Deadline(deadline_description="Endsem Exam Date", deadline_dateTime=endsem_exam + " 23:55:00", course=this_course)
             end_deadline.save()
-            context = {"course": this_course}
-            return render(request, "myadmin/feedback.html", context)
-        return render(request, "myadmin/add_course.html")
-    return HttpResponse("Permission Denied - You are not admin")
-
-
-@login_required(login_url='/login/')
-def feedback(request):
-    if isAdmin(request.user.username):
-        if request.method == "POST":
-            course_number = request.POST["course_number"]
-            year = request.POST["year"]
-            time_of_year = request.POST["time_of_year"]
-            thiscourse = Course.objects.get(course_number=course_number, year=year, time_of_year=time_of_year)
-            midsem_feedback = FeedbackForm(desciption="Midsem Feedback", course=thiscourse)
-            endsem_feedback = FeedbackForm(desciption="Endsem Feedback", course=thiscourse)
+            midsem_feedback = FeedbackForm(desciption="Midsem Feedback", course=this_course)
+            endsem_feedback = FeedbackForm(desciption="Endsem Feedback", course=this_course)
             midsem_feedback.save()
             endsem_feedback.save()
             midsem1 = request.POST["midsem1"]
@@ -73,8 +60,7 @@ def feedback(request):
             endsem_q1.save()
             endsem_q2.save()
             return HttpResponseRedirect("/admin/home")
-        else:
-            return HttpResponse("Not allowed")
+        return render(request, "myadmin/add_course.html")
     return HttpResponse("Permission Denied - You are not admin")
 
 
@@ -103,6 +89,7 @@ def load_students(request):
 
 
 @login_required(login_url='/login/')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def mylogout(request):
     if isAdmin(request.user.username):
         logout(request)
@@ -156,5 +143,4 @@ def enroll_student(request):
                 student.courses.add(checkcourse)
             return HttpResponseRedirect("/admin/enroll")
     return HttpResponse("Permission Denied - You are not admin")
-
 
