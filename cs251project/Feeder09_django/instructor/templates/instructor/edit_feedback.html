@@ -19,30 +19,48 @@
         <div class="row">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 well">
-                <table class="table">
-                    {% for ques in feedback.question_set.all %}
-                        <tr>
-                            <td>{{ques.ques_value}}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
+                    <legend>Questions</legend>
 
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <ul>
+
+                            {% for ques in feedback.question_set.all %}
+  <li>
+                            {{ques.ques_value}}
+</li>
+                    {% endfor %}
+
+                    </ul>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+ </div>
+
+
+
+
+<div class="row">
+                <div class="col-md-10 col-md-offset-1 well">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
+    <div class="panel-heading"  id="headingOne">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           Add Question
         </a>
       </h4>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+    <div id="collapseOne" class="panel-collapse collapse in"  aria-labelledby="headingOne">
       <div class="panel-body">
 
 
                              <form name="ques_add" action="/instructor/feedbacks/edit/" method="post">
                                 {% csrf_token %}
-                                <input type="hidden" name="feedback" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
+                                <input type="hidden" name="feed" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
 
                                  <label for="eq2">Question</label>
                             <div class="form-group">
@@ -56,16 +74,16 @@
 
 
 
-        </div>
-    </div>
 </div>
- </div>
+      </div>
+
 
 {% endblock %}
 
 
 {% block js %}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
       var date_input=$('input[name="date"]');

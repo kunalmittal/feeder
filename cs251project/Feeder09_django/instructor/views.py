@@ -123,9 +123,12 @@ def feedbacks(request):
 def edit_feedback(request):
     if isInstructor(request.user.username):
         if request.method == "POST":
-            curr_feedback = request.POST["feedback"]
+
+            curr_feedback = request.POST["feed"]
             curr_feedback = curr_feedback.split(";&%")
+
             this_course = Course.objects.get(course_number=curr_feedback[0], year=curr_feedback[1], time_of_year=curr_feedback[2])
+
             this_feedback = FeedbackForm.objects.get(course=this_course,description=curr_feedback[3], feedback_dateTime=curr_feedback[4])
             ques = request.POST["question"]
             newquestion = Question(ques_value=ques,ques_type="radio",feedback_form=this_feedback)
@@ -175,12 +178,21 @@ def add_feedback(request):
                 form_description = request.POST["description"]
                 submission_date = request.POST["submission_date"]
                 submission_time = request.POST["submission_time"]
+
                 if FeedbackForm.objects.filter(description=form_description, course=checkcourse).exists():
                     return HttpResponse("Feedback form already exists. Please provide a different name")
+
                 dateTime = submission_date+" "+submission_time
                 this_form = FeedbackForm(description=form_description, course=checkcourse,feedback_dateTime=dateTime)
                 this_form.save()
-                return HttpResponseRedirect("/instructor/home/")
+
+                new_course = Course.objects.get(course_number=course_number, year=year,
+                                                 time_of_year=time_of_year)
+                new_form = FeedbackForm.objects.get(course=new_course, description=form_description,
+                                                     feedback_dateTime=dateTime)
+                print(new_form.feedback_dateTime)
+                context = {"feedback": new_form}
+                return render(request, "instructor/edit_feedback.html", context)
             except Course.DoesNotExist:
                 return HttpResponse("Course does not exist")
         else:   
@@ -202,7 +214,7 @@ def editques_feedback(request):
                                                  feedback_dateTime=curr_feedback[4])
             context = {"feedback": this_form}
             return render(request, "instructor/edit_feedback.html", context)
-        return HttpResponse("Permission Denied")
+        return HttpResponse("Not allowed here")
     return HttpResponse("Permission Denied - You are an not instructor")
 
 

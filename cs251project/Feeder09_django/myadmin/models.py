@@ -43,7 +43,7 @@ class FeedbackForm(models.Model):
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.course.__str__() +" "+ self.description
+        return self.course.__str__() + " " + self.description
 
     @property
     def is_past_due(self):
@@ -59,9 +59,4 @@ class Question(models.Model):
     feedback_form = models.ForeignKey(FeedbackForm, on_delete=models.CASCADE, null="true")
 
     def __str__(self):
-        return self.feedback_form.__str__() +" question"
-
-class Answer(models.Model):
-    ans_value = models.IntegerField()
-    
-
+        return self.feedback_form.__str__() + " question"

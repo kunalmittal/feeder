@@ -76,7 +76,7 @@
                         </div>
                         <div class="form-group"> <!-- Date input -->
                             <label class="control-label" for="submission_time">Submission Time </label>
-                            <input class="form-control" id="submission_time" value="23:55" name="submission_time" type="submission_time">
+                            <input class="form-control" id="submission_time" value="23:55" name="submission_time" type="time">
                         </div>
                         <button type="submit" id="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -93,7 +93,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <script>
     $(document).ready(function(){
-      var date_input=$('input[name="date"]');
+      var date_input=$('input[name="submission_date"]');
       date_input.datepicker({ format: 'yyyy-mm-dd' });
     });
 
