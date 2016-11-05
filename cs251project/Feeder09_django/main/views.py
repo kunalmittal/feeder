@@ -3,9 +3,10 @@ from django.http import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import *
+from myadmin.models import *
 import csv
 import json
+from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -98,3 +99,21 @@ def fblogin(request):
             # user.save()
             return HttpResponse("Course does not exist")
     return HttpResponseRedirect("/login/")
+
+
+@csrf_exempt
+def loginApp(request):
+    if request.method == 'POST':
+        received_json_data = json.loads(request.body.decode("utf-8"))
+        username = received_json_data["username"]
+        mypassword = received_json_data["pass"]
+        username="s:"+username
+        print(username, mypassword)
+        myuser = authenticate(username=username, password=mypassword)
+        if myuser is not None:
+            student = Student.objects.get(user=myuser)
+            data = serializers.serialize("json", student.courses.all())
+        else:
+            data = "[{\"authenticated\": \"False\"}]"
+        return StreamingHttpResponse(data, content_type="application/json")
+    return HttpResponse("bad username/password")

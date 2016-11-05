@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def isInstructor(username):
-    if username[0] == "i" or username[0] == 's':          #REMOVE LATER
+    if username[0] == "i":          #REMOVE LATER
         return True
     return False
 
@@ -108,4 +108,103 @@ def add_deadline(request):
             context = {"all_courses": all_courses}
             return render(request, "instructor/add_deadline.html", context)
     return HttpResponse("Permission Denied - You are an not instructor")
+
+
+@login_required(login_url='/login/')
+def feedbacks(request):
+    if isInstructor(request.user.username):
+        sorted_feedbacks = FeedbackForm.objects.order_by('-feedback_dateTime')
+        context = {"all_feedbacks": sorted_feedbacks}
+        return render(request, "instructor/feedbacks.html", context)
+    return HttpResponse("Permission Denied - You are not an instructor")
+
+
+@login_required(login_url='/login/')
+def edit_feedback(request):
+    if isInstructor(request.user.username):
+        if request.method == "POST":
+            curr_feedback = request.POST["feedback"]
+            curr_feedback = curr_feedback.split(";&%")
+            this_course = Course.objects.get(course_number=curr_feedback[0], year=curr_feedback[1], time_of_year=curr_feedback[2])
+            this_feedback = FeedbackForm.objects.get(course=this_course,description=curr_feedback[3], feedback_dateTime=curr_feedback[4])
+            ques = request.POST["question"]
+            newquestion = Question(ques_value=ques,ques_type="radio",feedback_form=this_feedback)
+
+            # date = request.POST["date"]
+            # time = request.POST["time"]
+            # this_feedback.deadline_description = description
+            # this_deadline.deadline_dateTime = date+" "+time
+            newquestion.save()
+
+            this_course = Course.objects.get(course_number=curr_feedback[0], year=curr_feedback[1],
+                                             time_of_year=curr_feedback[2])
+            this_form = FeedbackForm.objects.get(course=this_course, description=curr_feedback[3],
+                                                 feedback_dateTime=curr_feedback[4])
+            context = {"feedback": this_form}
+            return render(request, "instructor/edit_feedback.html", context)
+        else:
+            HttpResponse("Permission Denied")
+    return HttpResponse("Permission Denied - You are not an instructor")
+
+
+@login_required(login_url='/login/')
+def remove_feedback(request):
+    if isInstructor(request.user.username):
+        if request.method == "POST":
+            curr_feedback = request.POST["feedback"]
+            curr_feedback = curr_feedback.split(";&%")
+            this_course = Course.objects.get(course_number=curr_feedback[0], year=curr_feedback[1], time_of_year=curr_feedback[2])
+            try:
+                this_feedback = FeedbackForm.objects.get(course=this_course, description=curr_feedback[3], feedback_dateTime=curr_feedback[4])
+                this_feedback.delete()
+            except FeedbackForm.DoesNotExist:
+                return HttpResponse("form does not exist")
+        return HttpResponseRedirect("/instructor/feedbacks/")
+    return HttpResponse("Permission Denied - You are not an instructor")
+
+
+@login_required(login_url='/login/')
+def add_feedback(request):
+    if isInstructor(request.user.username):
+        if request.method == "POST":
+            course_number = request.POST["course_number"]
+            time_of_year = request.POST["optionsRadios"]
+            year = request.POST["year"]
+            try:
+                checkcourse = Course.objects.get(course_number=course_number, year=year, time_of_year=time_of_year)
+                form_description = request.POST["description"]
+                submission_date = request.POST["submission_date"]
+                submission_time = request.POST["submission_time"]
+                if FeedbackForm.objects.filter(description=form_description, course=checkcourse).exists():
+                    return HttpResponse("Feedback form already exists. Please provide a different name")
+                dateTime = submission_date+" "+submission_time
+                this_form = FeedbackForm(description=form_description, course=checkcourse,feedback_dateTime=dateTime)
+                this_form.save()
+                return HttpResponseRedirect("/instructor/home/")
+            except Course.DoesNotExist:
+                return HttpResponse("Course does not exist")
+        else:   
+            all_courses = Course.objects.all()
+            context = {"all_courses": all_courses}
+            return render(request, "instructor/add_feedback.html", context)
+    return HttpResponse("Permission Denied - You are an not instructor")
+
+
+@login_required(login_url='/login/')
+def editques_feedback(request):
+    if isInstructor(request.user.username):
+        if request.method == "POST":
+            curr_feedback = request.POST["feedback"]
+            curr_feedback = curr_feedback.split(";&%")
+            this_course = Course.objects.get(course_number=curr_feedback[0], year=curr_feedback[1],
+                                             time_of_year=curr_feedback[2])
+            this_form = FeedbackForm.objects.get(course=this_course, description=curr_feedback[3],
+                                                 feedback_dateTime=curr_feedback[4])
+            context = {"feedback": this_form}
+            return render(request, "instructor/edit_feedback.html", context)
+        return HttpResponse("Permission Denied")
+    return HttpResponse("Permission Denied - You are an not instructor")
+
+
+
 

@@ -1,0 +1,80 @@
+{% extends "instructor/instructor_base.html" %}
+
+{% block content %}
+
+<div id="page-content-wrapper" class="">
+    <div class="page-content inset">
+        <div class="content-header">
+             <h1 id="home" class="">
+                    <a id="menu-toggle" href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                {{feedback.course.course_number}} {{feedback.description}} 
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 well">
+                <table class="table">
+                    {% for ques in feedback.question_set.all %}
+                        <tr>
+                            <td>{{ques.ques_value}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Add Question
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+
+
+                             <form name="ques_add" action="/instructor/feedbacks/edit/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="feedback" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
+
+                                 <label for="eq2">Question</label>
+                            <div class="form-group">
+                                <textarea class="form-control" id="eq2" name="question" rows="3" required>The homework assignments and/or associated laboratory exercises were ... ( Easy being 1 and Hard being 5 )</textarea>
+                            </div>
+                                <input type="submit" class="btn btn-primary" value="Add"/>
+                             </form>
+                         </div>
+                    </div>
+                </div>
+
+
+
+        </div>
+    </div>
+</div>
+ </div>
+
+{% endblock %}
+
+
+{% block js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]');
+      date_input.datepicker({ format: 'yyyy-mm-dd' });
+    });
+
+
+
+
+</script>
+
+{% endblock %}

@@ -38,11 +38,19 @@ class Student(models.Model):
 
 
 class FeedbackForm(models.Model):
-    desciption = models.CharField(max_length=50)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    description = models.CharField(max_length=50)
+    feedback_dateTime = models.DateTimeField()
+    course = models.ForeignKey(Course,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.course.__str__() +" "+ self.desciption
+        return self.course.__str__() +" "+ self.description
+
+    @property
+    def is_past_due(self):
+        now = timezone.localtime(timezone.now())
+        if now > self.feedback_dateTime:
+            return True
+        return False
 
 
 class Question(models.Model):
@@ -53,4 +61,7 @@ class Question(models.Model):
     def __str__(self):
         return self.feedback_form.__str__() +" question"
 
+class Answer(models.Model):
+    ans_value = models.IntegerField()
+    
 

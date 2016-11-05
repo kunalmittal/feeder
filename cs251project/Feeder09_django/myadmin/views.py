@@ -7,7 +7,7 @@ import csv
 from django.views.decorators.cache import cache_control
 import json
 from django.views.decorators.csrf import csrf_exempt
-
+from datetime import datetime, timedelta
 
 def isAdmin(username):
     if username[0] == "a":
@@ -43,8 +43,12 @@ def add_course(request):
             mid_deadline.save()
             end_deadline = Deadline(deadline_description="Endsem Exam Date", deadline_dateTime=endsem_exam + " 23:55:00", course=this_course)
             end_deadline.save()
-            midsem_feedback = FeedbackForm(desciption="Midsem Feedback", course=this_course)
-            endsem_feedback = FeedbackForm(desciption="Endsem Feedback", course=this_course)
+            midsem_dateTime = (datetime.now()+ timedelta(days=60)).strftime("%Y-%m-%d") 
+            endsem_dateTime = (datetime.now()+ timedelta(days=120)).strftime("%Y-%m-%d")
+            midsem_dateTime = midsem_dateTime + " 23:55"
+            endsem_dateTime = endsem_dateTime + " 23:55"
+            midsem_feedback = FeedbackForm(description="Midsem Feedback", feedback_dateTime=midsem_dateTime, course=this_course)
+            endsem_feedback = FeedbackForm(description="Endsem Feedback", feedback_dateTime=endsem_dateTime, course=this_course)
             midsem_feedback.save()
             endsem_feedback.save()
             midsem1 = request.POST["midsem1"]
@@ -53,8 +57,8 @@ def add_course(request):
             endsem2 = request.POST["endsem2"]
             midsem_q1 = Question(ques_value=midsem1, ques_type="radio", feedback_form=midsem_feedback)
             midsem_q2 = Question(ques_value=midsem2, ques_type="radio", feedback_form=midsem_feedback)
-            endsem_q1 = Question(ques_value=endsem1, ques_type="radio", feedback_form=midsem_feedback)
-            endsem_q2 = Question(ques_value=endsem2, ques_type="radio", feedback_form=midsem_feedback)
+            endsem_q1 = Question(ques_value=endsem1, ques_type="radio", feedback_form=endsem_feedback)
+            endsem_q2 = Question(ques_value=endsem2, ques_type="radio", feedback_form=endsem_feedback)
             midsem_q1.save()
             midsem_q2.save()
             endsem_q1.save()

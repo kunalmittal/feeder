@@ -1,0 +1,124 @@
+{% extends "instructor/instructor_base.html" %}
+
+{% block content %}
+
+<div id="page-content-wrapper" class="">
+    <div class="page-content inset">
+        <div class="row">
+            <div class="content-header">
+                <h1 id="home" class="">
+                    <a id="menu-toggle" href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    Running Feedbacks
+                </h1>
+            </div>
+
+            <div class="col-md-1"></div>
+            <div class="col-md-10 well">
+                <table class="table">
+                    <tr>
+                        <th>Course Number</th>
+                        <th>Description</th>
+                        <th>Submission Date</th>
+                        <th>Submission Time</th>
+                        <th></th><th></th>
+                    </tr>
+                    {% for feedback in all_feedbacks reversed %}
+                        {% if not feedback.is_past_due %}
+                            <tr>
+
+                                <td>{{feedback.course.course_number}}</td>
+                                <td>{{feedback.description}}</td>
+                                <td>{{feedback.feedback_dateTime|date:'d-m-Y'}}</td>
+                                <td>{{feedback.feedback_dateTime|date:'H:i'}}</td>
+                                <td>
+                                    <form method="post" action="/instructor/feedbacks/editques/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="feedback" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
+                                        <input type="submit" value="Edit" class="btn-xs btn-primary">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="/instructor/feedbacks/remove/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="feedback" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
+                                        <input type="submit" value="Remove" class="btn-xs btn-danger confirm">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <div class="page-content inset">
+        <div class="row">
+            <div class="content-header">
+                <h1 class="">
+                    <a href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    Past Feedbacks
+                </h1>
+            </div>
+
+            <div class="col-md-1"></div>
+            <div class="col-md-10 well">
+                <table class="table">
+                    <tr>
+                        <th>Course Number</th>
+                        <th>Description</th>
+                        <th>Submission Date</th>
+                        <th>Submission Time</th>
+                        <th></th><th></th>
+                    </tr>
+                    {% for feedback in all_feedbacks %}
+                        {% if feedback.is_past_due %}
+                            <tr>
+                                <td>{{feedback.course.course_number}}</td>
+                                <td>{{feedback.description}}</td>
+                                <td>{{feedback.feedback_dateTime|date:'d-m-Y'}}</td>
+                                <td>{{feedback.feedback_dateTime|date:'H:i'}}</td>
+                                <td>
+                                    <form method="post" action="/instructor/feedbacks/editques/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="feedback" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
+                                        <input type="submit" value="Edit" class="btn-xs btn-primary">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="/instructor/feedbacks/remove/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="feedback" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
+                                        <input type="submit" value="Remove" class="btn-xs btn-danger confirm">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    $(function() {
+        $('.confirm').click(function() {
+            return window.confirm("Are you sure you want to delete this form?");
+        });
+    });
+</script>
+{% endblock %}

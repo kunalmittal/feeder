@@ -1,0 +1,103 @@
+{% extends "instructor/instructor_base.html" %}
+
+{% block content %}
+
+<div id="page-content-wrapper" class="">
+    <div class="page-content inset">
+        <div class="content-header">
+             <h1 id="home" class="">
+                    <a id="menu-toggle" href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                Add Feedback
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 well">
+                    <form action="" id="addFeedback" method="post">
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <label for="course_number">Course Number</label>
+                            <select id="course_number" name="course_number" class="form-control">
+                                {% for course in all_courses %}
+                                <option>{{course.course_number}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Semester:&nbsp;&nbsp;</label>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="Autumn" checked>
+                                Autumn
+                              </label>
+                            </div>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="Spring">
+                                Spring
+                              </label>
+                            </div>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="Summer">
+                                Summer
+                              </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="year" for="year">Year: </label>
+                            <select name="year" id="year" class="form-control">
+                                <option>2018</option>
+                                <option>2017</option>
+                                <option selected>2016</option>
+                                <option>2015</option>
+                                <option>2014</option>
+                                <option>2013</option>
+                                <option>2012</option>
+                                <option>2011</option>
+                                <option>2010</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ass_name">Description</label>
+                            <input type="text" class="form-control" name="description" placeholder="Feedback Name" id="ass_name" required>
+                        </div>
+
+                        <div class="form-group"> <!-- Date input -->
+                            <label class="control-label" for="submission_date">Submission Date: </label>
+                            <input class="form-control" id="submission_date" value="2016-10-05" name="submission_date" placeholder="MM/DD/YYY" type="text"/>
+                        </div>
+                        <div class="form-group"> <!-- Date input -->
+                            <label class="control-label" for="submission_time">Submission Time </label>
+                            <input class="form-control" id="submission_time" value="23:55" name="submission_time" type="submission_time">
+                        </div>
+                        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]');
+      date_input.datepicker({ format: 'yyyy-mm-dd' });
+    });
+
+
+</script>
+
+{% endblock %}
