@@ -9,6 +9,15 @@
 </head>
 <body>
 
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8&appId=345757629127576";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
     <div class="container">
     	<div class="row">
 			<div class="col-md-5 col-centered">
@@ -94,6 +103,13 @@
 			</div>
 		</div>
 	</div>
+	<form method="post" id="myform" action="/fb/register/">
+		{% csrf_token %}
+		<input type="email" id="email-value" name="email-value" hidden>
+		<input type="text" id="name-value" name="name-value" hidden>
+		<input type="submit" id="submit-button" hidden>
+	</form>
+
 
     <script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'main/js/jquery-3.1.1.min.js' %}"></script>
@@ -135,6 +151,62 @@
 		});
 
     </script>
+
+<script>
+
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function LoginToFacebook() {
+    FB.login(function(response) {
+		if (response.status === 'connected') {
+
+		FB.api('/me',{fields: 'email'}, function(response) {
+      	document.getElementById("email-value").value = response.email;
+      	document.getElementById("name-value").value = response.name;
+      	document.getElementById("myform").submit();
+
+    }, {scope: 'public_profile,email'});
+
+
+    } else if (response.status === 'not_authorized') {
+
+    } else {
+
+    }
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '{your-app-id}',
+    cookie     : true,  // enable cookies to allow the server to access
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.8' // use graph api version 2.8
+  });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+</script>
+
+
+<div class="row">
+	<div class="col-md-1 col-centered">
+		<div class="fb-login-button" scope="public_profile,email" onlogin="LoginToFacebook();" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+		<div id="status">
+		</div>
+	</div>
+</div>
+
 
 </body>
 </html>

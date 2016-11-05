@@ -79,3 +79,22 @@ def register(request):
         else:
             return HttpResponse("Email already registered")
     return HttpResponseRedirect("/login/")
+
+
+def fblogin(request):
+    if request.method == "POST":
+        myemail = request.POST["email-value"]
+        myname = request.POST["name-value"]
+        try:
+            user = User.objects.get(username=myemail)
+            if user.is_active:
+                login(request, user)
+                print(myemail)
+                return HttpResponseRedirect("/instructor/home/")
+            return render(request, "myadmin/enroll_in_course.html", context)
+        except User.DoesNotExist:
+            print(myemail)
+            # user = User.objects.create_user(username=myemail)
+            # user.save()
+            return HttpResponse("Course does not exist")
+    return HttpResponseRedirect("/login/")

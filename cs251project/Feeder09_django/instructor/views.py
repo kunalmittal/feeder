@@ -49,7 +49,7 @@ def deadlines(request):
             sorted_deadlines = Deadline.objects.order_by('-deadline_dateTime')
             context = {"all_deadlines": sorted_deadlines}
             return render(request, "instructor/deadlines.html", context)
-    return HttpResponse("Permission Denied - You are not instructor")
+    return HttpResponse("Permission Denied - You are not an instructor")
 
 
 @login_required(login_url='/login/')
@@ -62,7 +62,7 @@ def remove_deadline(request):
             this_deadline = Deadline.objects.get(course=this_course, deadline_description=curr_deadline[3], deadline_dateTime=curr_deadline[4])
             this_deadline.delete()
         return HttpResponseRedirect("/instructor/deadlines/")
-    return HttpResponse("Permission Denied - You are not instructor")
+    return HttpResponse("Permission Denied - You are not an instructor")
 
 
 @login_required(login_url='/login/')
@@ -80,7 +80,7 @@ def edit_deadline(request):
             this_deadline.deadline_dateTime = date+" "+time
             this_deadline.save()
         return HttpResponseRedirect("/instructor/deadlines/")
-    return HttpResponse("Permission Denied - You are not instructor")
+    return HttpResponse("Permission Denied - You are not an instructor")
 
 
 @login_required(login_url='/login/')
@@ -107,5 +107,5 @@ def add_deadline(request):
             all_courses = Course.objects.all()
             context = {"all_courses": all_courses}
             return render(request, "instructor/add_deadline.html", context)
-    return HttpResponse("Permission Denied - You are not instructor")
+    return HttpResponse("Permission Denied - You are an not instructor")
 
