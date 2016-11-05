@@ -68,7 +68,7 @@ def loadall():
     with open("students.csv", 'r') as f:
         reader = csv.reader(f)
         for row in reader:
-            myrollno = row[0]
+            myrollno = "s:"+row[0]
             myname = row[1]
             mypass = row[2]
             myemail = row[3]

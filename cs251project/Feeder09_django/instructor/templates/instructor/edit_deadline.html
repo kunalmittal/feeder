@@ -1,0 +1,62 @@
+{% extends "instructor/instructor_base.html" %}
+
+{% block content %}
+
+<div id="page-content-wrapper" class="">
+    <div class="page-content inset">
+        <div class="content-header">
+             <h1 id="home" class="">
+                    <a id="menu-toggle" href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                Edit Deadline
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 well">
+                    <legend>{{deadline.course.course_number}} {{deadline.course.time_of_year}} {{deadline.course.year}}</legend>
+                    <form action="/instructor/deadlines/edit/" id="addCourse" method="post">
+                    {% csrf_token %}
+
+                        <input type="hidden" name="deadline" value="{{deadline.course.course_number}};&%{{deadline.course.year}};&%{{deadline.course.time_of_year}};&%{{deadline.deadline_description}};&%{{deadline.deadline_dateTime|date:'Y-m-d H:i'}}">
+                        <div class="form-group">
+                            <label for="course_number">Description</label>
+                            <input type="text" class="form-control" name="description" value="{{deadline.deadline_description}}" id="course_number" required>
+                        </div>
+
+                        <div class="form-group"> <!-- Date input -->
+                            <label class="control-label" for="mid_date">Date: </label>
+                            <input class="form-control" id="mid_date" value="{{deadline.deadline_dateTime|date:'Y-m-d'}}" name="date" placeholder="MM/DD/YYY" type="text"/>
+                        </div>
+                        <div class="form-group"> <!-- Date input -->
+                            <label class="control-label" for="time">Time </label>
+                            <input class="form-control" id="time" value="{{deadline.deadline_dateTime|date:'H:i'}}" name="time" type="time">
+                        </div>
+                        <button type="submit" id="submit" class="btn btn-primaryt">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]');
+      date_input.datepicker({ format: 'yyyy-mm-dd' });
+    });
+
+
+</script>
+
+{% endblock %}

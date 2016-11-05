@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome Instructor</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'myadmin/css/admin_base.css' %}">
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+    <div id="wrapper" data-spy="scroll" data-target="#spy" class="">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="">
+            <nav id="spy">
+                <ul class="sidebar-nav nav">
+                    <li class=""> <a href="/instructor/home/" data-scroll="" class="">
+                                <span class="fa fa-anchor solo">Running Courses</span>
+                            </a>
+
+                    </li>
+
+                    <li class=""> <a href="/instructor/deadlines/" data-scroll="" class="">
+                                <span class="fa fa-anchor solo">View/Edit Deadlines</span>
+                            </a>
+
+                    </li>
+                    <li class=""> <a href="/instructor/add_deadline/" data-scroll="" class="">
+                                <span class="fa fa-anchor solo">Add Deadlines</span>
+                            </a>
+
+                    </li>
+                    <li class=""> <a href="/instructor/logout/" data-scroll="" class="">
+                                <span class="fa fa-anchor solo">Logout</span>
+                            </a>
+
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+        <!-- Page content -->
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+    <script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/jquery-3.1.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myadmin/js/sidebar.js' %}"></script>
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

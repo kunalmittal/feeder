@@ -33,7 +33,7 @@
                         <div class="checkbox">
                              <label>
                                 <input type="checkbox" name="student_list" value="{{student.user.username}}">
-                                {{student.user.username}} {{student.user.first_name}}
+                                {{student.user.username|slice:"2:"}} {{student.user.first_name}}
                              </label>
                         </div>
                         {% endfor %}

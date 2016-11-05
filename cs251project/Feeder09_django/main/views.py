@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import *
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import *
 import csv
@@ -21,7 +22,7 @@ def isInstructor(username):
 
 
 def login_init(request):
-    return HttpResponseRedirect("/login")
+    return HttpResponseRedirect("/login/")
 
 
 def login_main(request):
@@ -29,10 +30,11 @@ def login_main(request):
         if isAdmin(request.user.username):
             return HttpResponseRedirect("/admin/home")
         elif isInstructor(request.user.username):
-            return HttpResponseRedirect("/admin/home")                     # CHANGE LATER
-        else:
-            return HttpResponse("Please logout of superuser first")
-    if request.POST:
+            return HttpResponseRedirect("/instructor/home")
+        #else:
+                                                                           #CHANGE LATER
+            #return HttpResponse("Please logout of superuser first")
+    if request.method == "POST":
         username = request.POST['username']
         mypassword = request.POST['password']
         ad_or_ins = request.POST["optionsRadios"]
@@ -57,9 +59,23 @@ def login_admin(request, username, mypassword):
 def login_ins(request, username, mypassword):
     username = "i:"+username
     user = authenticate(username=username, password=mypassword)
-    # if user is not None:
-    #     if user.is_active:
-    #         login(request, user)
-    #         return HttpResponseRedirect("/admin/home")
-    return render(request, "main/login.html")
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return HttpResponseRedirect("/instructor/home/")
+    return HttpResponse("Bad username/password")
 
+
+def register(request):
+    if request.method == "POST":
+        myemail = request.POST["email"]
+        myemail = "i:"+myemail
+        mypassword = request.POST["password"]
+        name = request.POST["name"]
+        if not User.objects.filter(username=myemail).exists():
+            user = User.objects.create_user(username=myemail, password=mypassword, first_name=name)
+            user.save()
+            return HttpResponseRedirect("/login/")
+        else:
+            return HttpResponse("Email already registered")
+    return HttpResponseRedirect("/login/")

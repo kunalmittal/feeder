@@ -1,0 +1,42 @@
+{% extends "instructor/instructor_base.html" %}
+
+{% block content %}
+
+<div id="page-content-wrapper" class="">
+    <div class="page-content inset">
+        <div class="content-header">
+             <h1 id="home" class="">
+                    <a id="menu-toggle" href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                 Running Courses
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 well">
+                <table class="table">
+                    <tr>
+                        <th>Course Number</th>
+                        <th>Course Name</th>
+                        <th>Time Period</th>
+                    </tr>
+                    {% for course in all_courses %}
+                        <tr>
+                            <td>{{course.course_number}}</td>
+                            <td>{{course.course_name}}</td>
+                            <td>{{course.time_of_year}} {{course.year}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

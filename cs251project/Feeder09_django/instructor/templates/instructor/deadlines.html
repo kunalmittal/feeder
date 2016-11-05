@@ -1,0 +1,124 @@
+{% extends "instructor/instructor_base.html" %}
+
+{% block content %}
+
+<div id="page-content-wrapper" class="">
+    <div class="page-content inset">
+        <div class="row">
+            <div class="content-header">
+                <h1 id="home" class="">
+                    <a id="menu-toggle" href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    Running Deadlines
+                </h1>
+            </div>
+
+            <div class="col-md-1"></div>
+            <div class="col-md-10 well">
+                <table class="table">
+                    <tr>
+                        <th>Course Number</th>
+                        <th>Description</th>
+                        <th>Submission Date</th>
+                        <th>Submission Time</th>
+                        <th></th><th></th>
+                    </tr>
+                    {% for deadline in all_deadlines reversed %}
+                        {% if not deadline.is_past_due %}
+                            <tr>
+
+                                <td>{{deadline.course.course_number}}</td>
+                                <td>{{deadline.deadline_description}}</td>
+                                <td>{{deadline.deadline_dateTime|date:'d-m-Y'}}</td>
+                                <td>{{deadline.deadline_dateTime|date:'H:i'}}</td>
+                                <td>
+                                    <form method="post" action="">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="deadline" value="{{deadline.course.course_number}};&%{{deadline.course.year}};&%{{deadline.course.time_of_year}};&%{{deadline.deadline_description}};&%{{deadline.deadline_dateTime|date:'Y-m-d H:i'}}">
+                                        <input type="submit" value="Edit" class="btn-xs btn-primary">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="/instructor/deadlines/remove/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="deadline" value="{{deadline.course.course_number}};&%{{deadline.course.year}};&%{{deadline.course.time_of_year}};&%{{deadline.deadline_description}};&%{{deadline.deadline_dateTime|date:'Y-m-d H:i'}}">
+                                        <input type="submit" value="Remove" class="btn-xs btn-danger confirm">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <div class="page-content inset">
+        <div class="row">
+            <div class="content-header">
+                <h1 class="">
+                    <a href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    Past Deadlines
+                </h1>
+            </div>
+
+            <div class="col-md-1"></div>
+            <div class="col-md-10 well">
+                <table class="table">
+                    <tr>
+                        <th>Course Number</th>
+                        <th>Description</th>
+                        <th>Submission Date</th>
+                        <th>Submission Time</th>
+                        <th></th><th></th>
+                    </tr>
+                    {% for deadline in all_deadlines %}
+                        {% if deadline.is_past_due %}
+                            <tr>
+                                <td>{{deadline.course.course_number}}</td>
+                                <td>{{deadline.deadline_description}}</td>
+                                <td>{{deadline.deadline_dateTime|date:'d-m-Y'}}</td>
+                                <td>{{deadline.deadline_dateTime|date:'H:i'}}</td>
+                                <td>
+                                    <form method="post" action="">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="deadline" value="{{deadline.course.course_number}};&%{{deadline.course.year}};&%{{deadline.course.time_of_year}};&%{{deadline.deadline_description}};&%{{deadline.deadline_dateTime|date:'Y-m-d H:i'}}">
+                                        <input type="submit" value="Edit" class="btn-xs btn-primary">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="/instructor/deadlines/remove/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="deadline" value="{{deadline.course.course_number}};&%{{deadline.course.year}};&%{{deadline.course.time_of_year}};&%{{deadline.deadline_description}};&%{{deadline.deadline_dateTime|date:'Y-m-d H:i'}}">
+                                        <input type="submit" value="Remove" class="btn-xs btn-danger confirm">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    $(function() {
+        $('.confirm').click(function() {
+            return window.confirm("Are you sure you want to delete this deadline?");
+        });
+    });
+</script>
+{% endblock %}

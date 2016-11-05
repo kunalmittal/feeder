@@ -32,7 +32,7 @@
 								{% csrf_token %}
 										<div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-										<input type="text" name="username" tabindex="1" class="form-control" placeholder="Username" value="" required>
+										<input type="text" name="username" tabindex="1" class="form-control" placeholder="Username / Email" value="" required>
                                     </div>
                                     <br/>
 									<div class="input-group">
@@ -63,20 +63,21 @@
 									</div>
 								</form>
 
-								<form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
+								<form id="register-form" action="/register/" method="post" role="form" style="display: none;">
 									{% csrf_token %}
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+										<input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Name" value="" required>
 									</div>
 									<div class="form-group">
-										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="" required>
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required>
 									</div>
 									<div class="form-group">
-										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" required>
 									</div>
+									<div class="registrationFormAlert" id="divCheckPasswordMatch"></div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
@@ -115,6 +116,24 @@
             });
 
         });
+
+		function checkPasswordMatch() {
+			var password = $("#password").val();
+			var confirmPassword = $("#confirm-password").val();
+
+			if (password != confirmPassword)
+				$("#divCheckPasswordMatch").html("Passwords do not match!<br>");
+			else
+        		$("#divCheckPasswordMatch").html("");
+		}
+        $(document).ready(function () {
+		   $("#confirm-password").keyup(checkPasswordMatch);
+		});
+		$( "#register-submit" ).click(function() {
+		  if( $("#password").val() != $("#confirm-password").val())
+			  return false;
+		});
+
     </script>
 
 </body>
