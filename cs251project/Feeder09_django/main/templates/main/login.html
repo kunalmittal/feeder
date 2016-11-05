@@ -155,32 +155,40 @@
 <script>
 
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function LoginToFacebook() {
-    FB.login(function(response) {
-		if (response.status === 'connected') {
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
 
-		FB.api('/me',{fields: 'email'}, function(response) {
-      	document.getElementById("email-value").value = response.email;
-      	document.getElementById("name-value").value = response.name;
-      	document.getElementById("myform").submit();
+      if (response.status === 'connected') {
 
-    }, {scope: 'public_profile,email'});
+					FB.api('/me',{ fields: 'email' }, function(response) {
+      console.log(response.email);
+    document.getElementById('email-value').value=response.email;
+        document.getElementById('name-value').value=response.name;
+		document.forms["myform"].submit();
+    });
+				}
+				else
+				{
+
+					FB.login(function(response) {
+						if (response.status === 'connected') {
+							FB.api('/me',{ fields: 'email' }, function(response) {
+      console.log(response.email);
+    document.getElementById('email-value').value=response.email;
+        document.getElementById('name-value').value=response.name;
+		document.forms["myform"].submit();
+    });
+						}
+					}, {scope: 'email'});
+				}
 
 
-    } else if (response.status === 'not_authorized') {
-
-    } else {
-
-    }
     });
   }
 
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '{your-app-id}',
+    appId      : '{345757629127576}',
     cookie     : true,  // enable cookies to allow the server to access
                         // the session
     xfbml      : true,  // parse social plugins on this page
@@ -196,12 +204,13 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
+
 </script>
 
 
 <div class="row">
 	<div class="col-md-1 col-centered">
-		<div class="fb-login-button" scope="public_profile,email" onlogin="LoginToFacebook();" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+		<div class="fb-login-button" onsubmit="checkLoginState();" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
 		<div id="status">
 		</div>
 	</div>
