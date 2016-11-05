@@ -89,18 +89,16 @@ def fblogin(request):
         print(myname)
         print (myemail)
         print("HI")
-        # try:
-        #     user = User.objects.get(username=myemail)
-        #     if user.is_active:
-        #         login(request, user)
-        #         print(myemail)
-        #         return HttpResponseRedirect("/instructor/home/")
-        #     return render(request, "myadmin/enroll_in_course.html", context)
-        # except User.DoesNotExist:
-        #     print(myemail)
-        #     # user = User.objects.create_user(username=myemail)
-        #     # user.save()
-        #     return HttpResponse("Course does not exist")
+        try:
+            user = User.objects.get(username=myemail)
+            if user.is_active:
+                login(request, user)
+                # print(myemail)
+                return HttpResponseRedirect("/instructor/home/")
+        except User.DoesNotExist:
+            user = User.objects.create_user(username=myemail)
+            user.save()
+            login(request, user)
     return HttpResponseRedirect("/login/")
 
 
