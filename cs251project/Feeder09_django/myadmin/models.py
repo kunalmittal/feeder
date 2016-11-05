@@ -57,6 +57,15 @@ class Question(models.Model):
     ques_value = models.CharField(max_length=200)
     ques_type = models.CharField(max_length=10)
     feedback_form = models.ForeignKey(FeedbackForm, on_delete=models.CASCADE, null="true")
-
+    op1 = models.IntegerField(default=0)
+    op2 = models.IntegerField(default=0)
+    op3 = models.IntegerField(default=0)
+    op4 = models.IntegerField(default=0)
+    op5 = models.IntegerField(default=0)
     def __str__(self):
         return self.feedback_form.__str__() + " question"
+
+
+
+
+

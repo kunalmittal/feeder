@@ -113,7 +113,7 @@ def loginApp(request):
         myuser = authenticate(username=username, password=mypassword)
         if myuser is not None:
             student = Student.objects.get(user=myuser)
-            course_query = stud.courses_set.all()
+            course_query = student.courses.all()
             for c in course_query:
 
                 s = "{\"courses\":[";
@@ -164,6 +164,4 @@ def loginApp(request):
         return StreamingHttpResponse(data, content_type="application/json")
     return HttpResponse("bad username/password")
 
-
-stud= Student.objects.get(roll_number = username2)
 

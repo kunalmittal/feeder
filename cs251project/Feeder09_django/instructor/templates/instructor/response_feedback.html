@@ -1,0 +1,68 @@
+{% extends "instructor/instructor_base.html" %}
+{% block content %}
+
+<div id="page-content-wrapper" class="">
+    <div class="page-content inset">
+        <div class="content-header">
+             <h1 id="home" class="">
+                    <a id="menu-toggle" href="#" class="btn btn-menu btn-lg toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                Responses for {{feedback.course.course_number}} {{feedback.description}}
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 well">
+                    <ul>
+                    {% for ques in all_questions %}
+                    <li>
+                        {{ques.ques_value}}
+                        <br>
+                        <table style="width:100%;">
+                          <tr>
+                            <th>Rating</th>
+                            <th>1</th>
+                            <th>2</th> 
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                          </tr>
+                          <tr>
+                        {# <table class="table"> #}
+                            <td>No.of Responses</td>
+                            <td>{{ques.op1}}</td>
+                            <td>{{ques.op2}}</td>
+                            <td>{{ques.op3}}</td>
+                            <td>{{ques.op4}}</td>
+                            <td>{{ques.op5}}</td>
+                          </tr>
+                        </table>
+                        <br>        
+                    </li>
+                    {% endfor %}
+                    </ul>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]');
+      date_input.datepicker({ format: 'yyyy-mm-dd' });
+    });
+
+
+</script>
+
+{% endblock %}

@@ -42,6 +42,13 @@
                                     </form>
                                 </td>
                                 <td>
+                                    <form method="post" action="/instructor/feedbacks/response/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="feedback" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
+                                        <input type="submit" value="View" class="btn-xs btn-primary">
+                                    </form>
+                                </td>
+                                <td>
                                     <form method="post" action="/instructor/feedbacks/remove/">
                                         {% csrf_token %}
                                         <input type="hidden" name="feedback" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
@@ -93,6 +100,13 @@
                                         {% csrf_token %}
                                         <input type="hidden" name="feedback" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
                                         <input type="submit" value="Edit" class="btn-xs btn-primary">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="/instructor/feedbacks/response/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="feedback" value="{{feedback.course.course_number}};&%{{feedback.course.year}};&%{{feedback.course.time_of_year}};&%{{feedback.description}};&%{{feedback.feedback_dateTime|date:'Y-m-d H:i'}}">
+                                        <input type="submit" value="View" class="btn-xs btn-primary">
                                     </form>
                                 </td>
                                 <td>

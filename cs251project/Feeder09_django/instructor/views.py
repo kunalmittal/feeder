@@ -217,6 +217,25 @@ def editques_feedback(request):
         return HttpResponse("Not allowed here")
     return HttpResponse("Permission Denied - You are an not instructor")
 
+@login_required(login_url='/login/')
+def response_feedback(request):
+    if isInstructor(request.user.username):
+        if request.method == "POST":
+            curr_feedback = request.POST["feedback"]
+            curr_feedback = curr_feedback.split(";&%")
+            this_course = Course.objects.get(course_number=curr_feedback[0], year=curr_feedback[1],
+                                             time_of_year=curr_feedback[2])
+            this_form = FeedbackForm.objects.get(course=this_course, description=curr_feedback[3],
+                                                 feedback_dateTime=curr_feedback[4])
+            all_questions = this_form.question_set.all()
+            context = {"feedback": this_form, "all_questions" : all_questions}
+            return render(request, "instructor/response_feedback.html", context)
+        return HttpResponse("Not allowed here")
+    return HttpResponse("Permission Denied - You are an not instructor")
+
+
+
+
 
 
 

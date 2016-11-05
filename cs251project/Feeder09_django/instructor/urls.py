@@ -17,5 +17,6 @@ urlpatterns = [
     url(r'^feedbacks/edit/$', views.edit_feedback, name="edit_feedback"),
     url(r'^add_feedback/$', views.add_feedback, name="add_feedback"),
     url(r'^feedbacks/editques/$', views.editques_feedback, name="editques_feedback"),
+    url(r'^feedbacks/response/$', views.response_feedback, name="response_feedback"),
 
 ]
