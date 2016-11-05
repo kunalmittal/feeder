@@ -355,8 +355,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             try {
                 // Simulate network access.
-                //URL url = new URL("http://localhost:8009/login/app/");
-                URL url = new URL("http://192.168.0.103:8009/login/app/");
+                URL url = new URL("http://localhost:8009/login/app/");
+                //URL url = new URL("http://192.168.0.103:8009/login/app/");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setDoInput(true);
@@ -400,11 +400,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                     System.out.println(json_text);
 
-                    JSONArray myArray = new JSONArray(json_text);
+                    JSONObject myArray = new JSONObject(json_text);
 
-                    JSONObject obj1 = (JSONObject) myArray.get(0);
-
-                    isAuthenticated = obj1.has("authenticated");
+                    isAuthenticated = myArray.has("authenticated");
                 }
                 else{
                     System.out.println(urlConnection.getResponseMessage());
@@ -437,7 +435,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     mPasswordView.setError(getString(R.string.error_incorrect_password));
                     mPasswordView.requestFocus();
                 }
-                else{
+                else if(!isAuthenticated){
                     SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("isLoggedIn", true);

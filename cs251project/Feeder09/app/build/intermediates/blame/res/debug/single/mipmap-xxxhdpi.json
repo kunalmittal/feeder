@@ -2,5 +2,13 @@
     {
         "merged": "/Users/kunal/Desktop/Feeder09/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher.png",
         "source": "/Users/kunal/Desktop/Feeder09/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/kunal/Documents/Feeder09/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher.png",
+        "source": "/Users/kunal/Documents/Feeder09/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/kunal/Desktop/feeder/cs251project/Feeder09/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher.png",
+        "source": "/Users/kunal/Desktop/feeder/cs251project/Feeder09/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
     }
 ]

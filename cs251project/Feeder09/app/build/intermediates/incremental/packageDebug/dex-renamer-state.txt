@@ -1,7 +1,7 @@
-#Sat Nov 05 19:43:08 IST 2016
-base.0=/Users/kunal/Desktop/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a0eba5526b9553ec0092d14b6ff73c28fb4a3bf0
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=/Users/kunal/Desktop/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_2051dba25d5b803cd88ad64ffdd0cbd49af65abd/classes.dex
-base.1=/Users/kunal/Desktop/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_2051dba25d5b803cd88ad64ffdd0cbd49af65abd
-file.0=/Users/kunal/Desktop/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a0eba5526b9553ec0092d14b6ff73c28fb4a3bf0/classes.dex
+#Sat Nov 05 23:04:20 IST 2016
+base.0=/Users/kunal/Desktop/feeder/cs251project/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d1e7df97c62ea81e97f4188e159999de60cdef5b
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/kunal/Desktop/feeder/cs251project/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_92661781936e018e05e5f8cd5e077f0732bb19db/classes.dex
+base.1=/Users/kunal/Desktop/feeder/cs251project/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_92661781936e018e05e5f8cd5e077f0732bb19db
+file.0=/Users/kunal/Desktop/feeder/cs251project/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d1e7df97c62ea81e97f4188e159999de60cdef5b/classes.dex

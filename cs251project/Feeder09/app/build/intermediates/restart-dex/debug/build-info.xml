@@ -5,39 +5,219 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="205604227509367"
+    timestamp="217491158424902"
     token="-3196408907069681984"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="550" />
+        duration="761" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="51" />
+        duration="373" />
     <task
         name="verifier"
-        duration="19" />
+        duration="151" />
 
     <artifact
-        location="/Users/kunal/Desktop/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+        type="RESOURCES" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_d5c1c41674eb8421496110b3e2d76eedb2492a10/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_3751ddb118bde401a70fecadde384271e19ea9da/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.1_b7ee6bc18e0b2d166ca36486911e4ed4a0d7698f/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_1/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_602334b429465daf17831157a79bab10329ce93b/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_9a1b6e90599d06a02ee169cc797a6d90dc161968/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_aa8fd958c191194f51403def8b7edcedb7267965/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_b8eeb8f5f2eddbbb3fed807fcafa7a1a4a0f0262/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_43bf35bcbbf59dbaf3de7ad4a29d8ff810d2dad1/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.1_b2a367ec9c03131fd7924d65cb8aabc59253ca40/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_553418f989c5ceea1f86453f9738d5b8f7627081/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_99965cf41f986973ec06dd657828df8ec6fd06be/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_13b40f2b06a420fa6e0f8afe6452e4ceda4c2d90/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_3168d77ec078c6440b09d39d3c9d1a3c05011199/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-24.2.1_259c8e4fb3d79f6e50767034ddeca2939b0bd00f/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.prolificinteractive-material-calendarview-1.4.2_0db47049a946c68b3c6f1149c20b51f99868b657/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.1_fee90a6c594730f8d647fa75e6ba77b9c87590f9/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_9e5dd621358be270c86e359635bcf1ae111e9a66/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_d222d759427207bde2152ff32e850aa094b82a7d/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_9f6b5046b18829df54ec5d8fcf7ac23487d9afe1/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.1_854a0571371219d153598f477663e1f2c3543945/classes.dex"
         type="DEX" />
 
     <build
-        timestamp="205467205317627"
+        timestamp="217008315202444"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/Users/kunal/Desktop/Feeder09/app/build/outputs/apk/app-debug.apk"
+            location="/Users/kunal/Desktop/feeder/cs251project/Feeder09/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="205604227509367"
+        timestamp="217491158424902"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="/Users/kunal/Desktop/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+            type="RESOURCES" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_d5c1c41674eb8421496110b3e2d76eedb2492a10/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_3751ddb118bde401a70fecadde384271e19ea9da/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.1_b7ee6bc18e0b2d166ca36486911e4ed4a0d7698f/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_1/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_602334b429465daf17831157a79bab10329ce93b/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_9a1b6e90599d06a02ee169cc797a6d90dc161968/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_aa8fd958c191194f51403def8b7edcedb7267965/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_b8eeb8f5f2eddbbb3fed807fcafa7a1a4a0f0262/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_43bf35bcbbf59dbaf3de7ad4a29d8ff810d2dad1/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.1_b2a367ec9c03131fd7924d65cb8aabc59253ca40/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_553418f989c5ceea1f86453f9738d5b8f7627081/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_99965cf41f986973ec06dd657828df8ec6fd06be/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_13b40f2b06a420fa6e0f8afe6452e4ceda4c2d90/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_3168d77ec078c6440b09d39d3c9d1a3c05011199/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-24.2.1_259c8e4fb3d79f6e50767034ddeca2939b0bd00f/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.prolificinteractive-material-calendarview-1.4.2_0db47049a946c68b3c6f1149c20b51f99868b657/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.1_fee90a6c594730f8d647fa75e6ba77b9c87590f9/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_9e5dd621358be270c86e359635bcf1ae111e9a66/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_d222d759427207bde2152ff32e850aa094b82a7d/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_9f6b5046b18829df54ec5d8fcf7ac23487d9afe1/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/kunal/Documents/Feeder09/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.1_854a0571371219d153598f477663e1f2c3543945/classes.dex"
             type="DEX" />
     </build>
 
