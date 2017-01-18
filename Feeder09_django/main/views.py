@@ -102,8 +102,9 @@ def fblogin(request):
     return HttpResponseRedirect("/login/")
 
 
-# @csrf_exempt
-# def loginApp(request):
+@csrf_exempt
+def loginApp(request):
+    return HttpResponse("bad username/password")
 #     if request.method == 'POST':
 #         received_json_data = json.loads(request.body.decode("utf-8"))
 #         username = received_json_data["username"]
@@ -162,6 +163,5 @@ def fblogin(request):
 #         else:
 #             data = "[{\"authenticated\": \"False\"}]"
 #         return StreamingHttpResponse(data, content_type="application/json")
-#     return HttpResponse("bad username/password")
 
 
